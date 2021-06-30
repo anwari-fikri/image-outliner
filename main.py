@@ -5,6 +5,7 @@ import os
 
 def stroke(origin_image, threshold, stroke_size, colors):
     img_pillow = Image.open(origin_image)
+    img_pillow = img_pillow.convert('RGBA')
     img = np.asarray(img_pillow)
     h, w, _ = img.shape
     padding = stroke_size + 50
@@ -49,5 +50,9 @@ def cv2pil(cv_img):
 input_path = "./Input/"
 output_path = "./Output/"
 for image_name in os.listdir('./Input'):
-    src = input_path + image_name
-    stroke(src, threshold=0, stroke_size=10, colors=((255,255,255),)).save(output_path + image_name)
+    try:
+        src = input_path + image_name
+        stroke(src, threshold=0, stroke_size=10, colors=((255,255,255),)).save(output_path + image_name)
+    except:
+        pass
+
