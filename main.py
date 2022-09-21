@@ -46,12 +46,13 @@ def cv2pil(cv_img):
     pil_img = Image.fromarray(cv_img.astype("uint8"))
     return pil_img
 
+
 if __name__ == "__main__":
     input_path = "./Input/"
     output_path = "./Output/"
     for image_name in os.listdir('./Input'):
-        try:
-            src = input_path + image_name
-            stroke(src, threshold=0, stroke_size=10, colors=((255,255,255),)).save(output_path + image_name)
-        except:
-            pass
+        src = input_path + image_name
+        image_name_without_extension = image_name.split('.')[0]
+
+        stroked_image = stroke(src, threshold=0, stroke_size=10, colors=((100,100,255),))
+        stroked_image.save(output_path + image_name_without_extension + ".png")
